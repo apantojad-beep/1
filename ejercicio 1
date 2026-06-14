@@ -1,0 +1,71 @@
+import tkinter as tk
+from tkinter import messagebox
+
+
+def calcular():
+    try:
+        messagebox.showinfo("Atención", "Ingresando al primer try")
+
+        numerador = float(txt_num.get())
+        denominador = float(txt_den.get())
+
+        if denominador == 0:
+            messagebox.showinfo("Atención", "División por cero")
+            cociente = "Infinity"
+        else:
+            cociente = numerador / denominador
+            messagebox.showinfo("Atención", "Después de la división")
+
+        txt_coc.delete(0, tk.END)
+        txt_coc.insert(0, str(cociente))
+
+    except ValueError:
+        messagebox.showerror("Error", "Ingrese números válidos")
+
+    finally:
+        messagebox.showinfo("Atención", "Ingresando al primer finally")
+
+
+    try:
+        messagebox.showinfo("Atención", "Ingresando al segundo try")
+
+        objeto = None
+        objeto.upper()  
+
+        messagebox.showinfo("Atención", "Imprimiendo objeto")
+
+    except Exception:
+        messagebox.showinfo("Atención", "Ocurrió una excepción")
+
+    finally:
+        messagebox.showinfo("Atención", "Ingresando al segundo finally")
+
+
+def limpiar():
+    txt_num.delete(0, tk.END)
+    txt_den.delete(0, tk.END)
+    txt_coc.delete(0, tk.END)
+
+
+ventana = tk.Tk()
+ventana.title("Calculadora de Cociente")
+ventana.geometry("500x300")
+
+
+tk.Label(ventana, text="Numerador").place(x=50, y=50)
+tk.Label(ventana, text="Denominador").place(x=50, y=100)
+tk.Label(ventana, text="Cociente").place(x=50, y=150)
+
+txt_num = tk.Entry(ventana, width=30)
+txt_num.place(x=170, y=50)
+
+txt_den = tk.Entry(ventana, width=30)
+txt_den.place(x=170, y=100)
+
+txt_coc = tk.Entry(ventana, width=30)
+txt_coc.place(x=170, y=150)
+
+tk.Button(ventana, text="Calcular", command=calcular).place(x=170, y=220)
+tk.Button(ventana, text="Limpiar", command=limpiar).place(x=270, y=220)
+
+ventana.mainloop()
